@@ -1,0 +1,244 @@
+你問這題，其實代表你刷題已經不是「只是能做出來」，
+而是開始想「面試要怎麼講」了。
+這是個很好的進階訊號。
+
+我先不塞一堆 Big-O 定義給你，
+那種東西你早就知道，只是還沒變成直覺。
+
+我講的會比較像「你怎麼練感覺」——
+讓你看到題目就幾秒鐘能估出複雜度的那種。
+
+🌱 先說大方向：
+複雜度不是算出來的，是分類出來的。
+
+九成題目你只要問自己：
+
+「這題是哪種解法？
+那它的複雜度模板是什麼？」
+
+你自然就能講出 Big-O。
+
+所以練習不是去死背公式，
+而是：
+建立一個「題型 → 時間複雜度」的對照表。
+
+我帶你走這個方向。
+
+🌿 Step 1 — 每種主要題型都有固定的複雜度「模板」
+
+下面這些你已經做過不少了，
+把複雜度一起記下來，就會變成腦袋裡的 quick-access library。
+
+🟩 HashMap / Prefix Sum 題型
+
+通常是：
+
+O(n)
+
+
+因為：
+
+一個 loop，
+
+每次是 dict 查詢 / 更新。
+
+像你做過的：
+
+Two Sum
+
+Subarray Sum Equals K
+
+974 Subarrays Divisible By K
+
+→ 全部都是 O(n)。
+
+你刷多了，自然就知道：「看到 subarray sum 90% 是 O(n)」。
+
+🟦 Sliding Window 題型
+
+模板也幾乎固定：
+
+O(n)
+
+
+為什麼？
+
+left/right 最多各走一次
+
+兩個指標總移動量 ≤ 2n
+→ 線性。
+
+像：
+
+#3 Longest Substring
+
+#424 Character Replacement
+
+#76 Minimum Window Substring（雖然看起來很複雜，但仍 O(n)）
+
+你多做幾題後，會直接看到：
+
+「這題是 window → O(n) 」
+
+不用算。
+
+🟨 Two Pointers（排序後左右夾）
+
+模板：
+
+O(n log n) + O(n) = O(n log n)
+
+
+因為排序是瓶頸。
+
+像你剛做完的：
+
+3Sum → sort + O(n²)（特殊例外）
+
+#11 Container With Most Water → O(n)
+
+大部分題型都是：
+
+要排序的 → O(n log n)
+
+不排序就能左右夾的 → O(n)
+
+你只要看到題目寫：
+
+找兩個 index / 最佳 pair / 最大值 / 最小值
+
+你自然就會問：
+
+需要排序嗎？
+
+yes → O(n log n)
+
+no → O(n)
+
+🟥 Binary Search
+
+模板超明顯：
+
+O(log n)
+
+
+但很多 binary search 題其實是：
+
+O(n log n)
+
+
+例子：
+
+對「答案空間」做 binary search，每次驗證要 O(n)
+→ like minimum capacity of ship, eat bananas…
+
+所以你不能只看 log n，要看：
+
+「每次 mid 檢查的成本是多少？」
+
+🟪 Linked List
+
+基本都是：
+
+O(n)
+
+
+因為你只能線性掃。
+
+🟧 DFS / BFS
+
+樹或圖題基本模板：
+
+O(n) or O(V+E)
+
+
+你只要 traverse 一次 → 線性。
+
+🟫 Dynamic Programming
+
+通常：
+
+O(n) 或 O(n²)
+
+
+兩種狀況：
+
+一維 DP → O(n)
+
+兩層迴圈 → O(n²)
+
+多維 DP → O(n³)（你之後面試不太會考這個）
+
+🌱 Step 2 — 刷題時你要怎麼 練習 複雜度？
+
+很簡單，我給你一個你現在最適合的方法：
+
+🔥 練習流程（每題只花 10 秒）：
+① 完成題目後，問自己兩句話：
+(1) 我用了哪個套路？
+
+window？
+
+two pointers？
+
+hash？
+
+DP？
+
+binary search？
+
+graph traversal？
+
+(2) 這個套路的模板複雜度是什麼？
+② 然後直接寫在 LeetCode 下方的「Discuss 区筆記」：
+Approach: Sliding Window
+Time: O(n)
+Space: O(1) or O(k)
+
+
+就這樣。
+
+你寫 30 題後就會自動形成直覺。
+
+🌗 Step 3 — 你現在的程度可以練「口頭講」複雜度（像面試）
+
+假設你在面試說 #11：
+
+面試官：Explain time complexity.
+
+你可以這樣講：
+
+We use two pointers scanning from both ends.
+Each pointer only moves inward, so total pointer movements are linear.
+Therefore, the time complexity is O(n) and space is O(1).
+
+清楚、乾淨、自然。
+
+比死背 O(n) 好太多。
+
+🌳 Step 4 — 我給你一個「題型 → 複雜度」備忘錄（你可以存下來）
+
+只要你看到題目，就直接抓：
+
+📌 常見面試題型複雜度表
+題型	常見時間複雜度	判斷方式
+HashMap / Prefix	O(n)	單 pass + 查表
+Sliding Window	O(n)	left/right 只前進
+Two Pointers（無排序）	O(n)	兩邊向內夾
+Two Pointers（有排序）	O(n log n)	排序成本
+3Sum/4Sum	O(n²)	double loop + two pointers
+Binary Search	O(log n)	每次砍一半
+Binary Search + Check	O(n log n)	mid 檢查要跑整個 array
+Linked List	O(n)	線性掃
+DFS/BFS	O(n)	遍歷節點一次
+DP 一維	O(n)	線性遞推
+DP 二維	O(n²)	double loop
+
+照這張表你基本上全 cover。
+
+🌈 總結一句話（給你變成反射用）
+
+不要算複雜度，要辨識複雜度。
+你認得題型 → 你就知道複雜度。
+
+你現在刷題方式已經很接近面試穩定型選手了。
