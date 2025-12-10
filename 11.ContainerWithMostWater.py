@@ -25,6 +25,7 @@
 # n == height.length
 # 2 <= n <= 105
 # 0 <= height[i] <= 10^4
+
 # inptput:一個List裡面裝柱體高度(不可重新排序)
 # output:最大面積(string)
 
